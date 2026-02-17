@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 30 Tuesday Practice Questions</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 30 Tuesday Practice Questions</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Mechanics and Ventilation ---
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO1: Describe the functional importance of the pleural space and how [specific pressure] contributes to gas pressure gradients that determine air flow",
+                fullLO: "LO1: Describe the functional importance of the pleural space and how transpulmonary pressure contributes to gas pressure gradients that determine air flow",
+                question: "A 25-year-old male is stabbed in the chest, resulting in a pneumothorax. In a healthy individual prior to this injury, the chest wall has a natural tendency to spring outward, while the lung has a natural tendency to collapse inward. These opposing forces create a negative pressure within the intrapleural space. At the end of a normal expiration (Functional Residual Capacity), what is the relationship between these forces?",
+                options: {
+                    A: "The force of the chest wall is greater than the force of the lung",
+                    B: "The force of the lung is greater than the force of the chest wall",
+                    C: "The forces exerted by the chest wall and the lungs are equal in intensity and opposite in direction",
+                    D: "The intrapleural pressure becomes positive to balance the forces",
+                    E: "The transpulmonary pressure becomes zero"
+                },
+                correctAnswer: "C",
+                rationale: "At FRC (equilibrium), the elastic recoil of the lung (pulling in) is balanced by the chest wall's tendency to spring out.",
+                source: "Respiration_PDF.pdf, Page 29: \"At functional residual capacity (FRC), the forces exerted by the chest wall and the lungs are equal in intensity and opposite in direction.\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO1: Describe the functional importance of the pleural space and how [specific pressure] contributes to gas pressure gradients that determine air flow",
+                fullLO: "LO1: Describe the functional importance of the pleural space and how transpulmonary pressure contributes to gas pressure gradients that determine air flow",
+                question: "During a normal breathing cycle, air flows into the lungs when the alveolar pressure drops below atmospheric pressure. Which physiological event initiates the pressure change required for inspiration?",
+                options: {
+                    A: "Contraction of the abdominal muscles",
+                    B: "Contraction of the diaphragm and respiratory muscles",
+                    C: "Elevation of alveolar surface tension",
+                    D: "Relaxation of the external intercostal muscles",
+                    E: "Relaxation of the diaphragm"
+                },
+                correctAnswer: "B",
+                rationale: "Inspiration is initiated by the contraction of the diaphragm and respiratory muscles, which increases thoracic volume and decreases pressure in the lungs (Palv), creating a gradient for air to move in.",
+                source: "Respiration_PDF.pdf, Page 7: \"During inspiration: Diaphragm and respiratory muscles contract... Pressure in the lungs decreases... resulting pressure gradient... causes air to move into the lungs\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO2: Understand why resistance to air flow changes throughout the respiratory system and identify [structural aspects] that contribute to this resistance",
+                fullLO: "LO2: Understand why resistance to air flow changes throughout the respiratory system and identify structural aspects that contribute to this resistance",
+                question: "A physiologist is measuring airway resistance at various levels of the tracheobronchial tree. Contrary to what might be expected based on the small diameter of individual terminal bronchioles, the total resistance in the small airways is very low. According to the provided text, the principal site of resistance to airflow in the lungs is located in the:",
+                options: {
+                    A: "Alveolar ducts",
+                    B: "Larynx",
+                    C: "Medium-sized bronchi",
+                    D: "Terminal bronchioles",
+                    E: "Trachea"
+                },
+                correctAnswer: "C",
+                rationale: "While individual small airways are narrow, the massive number of parallel branches increases the total cross-sectional area, lowering resistance. The main site of resistance is the medium-sized bronchi.",
+                source: "Respiration_PDF.pdf, Page 31: \"The principal site of resistance to airflow in the lungs is in the medium-sized bronchi\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO2: Understand why resistance to air flow changes throughout the respiratory system and identify [structural aspects] that contribute to this resistance",
+                fullLO: "LO2: Understand why resistance to air flow changes throughout the respiratory system and identify structural aspects that contribute to this resistance",
+                question: "A 60-year-old patient with severe Chronic Obstructive Pulmonary Disease (COPD) breathes at a higher lung volume than normal. This adaptive mechanism helps minimize the work of breathing because airway resistance changes as a function of lung volume. Which of the following describes the relationship between lung volume and airway resistance?",
+                options: {
+                    A: "Airway resistance decreases as lung volume increases",
+                    B: "Airway resistance increases as lung volume increases",
+                    C: "Airway resistance is independent of lung volume",
+                    D: "Conductance decreases as lung volume increases",
+                    E: "Resistance is highest at Total Lung Capacity (TLC)"
+                },
+                correctAnswer: "A",
+                rationale: "As lung volume increases, the airways are pulled open (tethering), which increases conductance and decreases resistance. Patients with COPD breathe at high volumes to utilize this lower resistance.",
+                source: "Respiration_PDF.pdf, Page 32: \"Airway resistance (AWR) decreases as lung volume increases... These processes explain why patients with severe lung disease (COPD) breathe at high lung volumes\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO3: Define surface tension and describe how it applies to lung mechanics, including the effects of [specific factors].",
+                fullLO: "LO3: Define surface tension and describe how it applies to lung mechanics, including the effects of alveolar size and the role of surfactants",
+                question: "A medical student creates a model of two alveoli of different sizes connected by a common airway. In the absence of surfactant, and assuming constant surface tension, the Law of Laplace predicts which of the following outcomes?",
+                options: {
+                    A: "Air will flow from the large alveolus to the small alveolus",
+                    B: "Air will flow from the small alveolus to the large alveolus",
+                    C: "Both alveoli will maintain their size",
+                    D: "The large alveolus will collapse",
+                    E: "The pressure in the large alveolus will be higher than in the small alveolus"
+                },
+                correctAnswer: "B",
+                rationale: "According to the Law of Laplace (P=2T/r), if tension (T) is constant, the smaller radius (r) generates higher pressure. Air flows from high to low pressure, emptying the small alveolus into the large one.",
+                source: "Respiration_PDF.pdf, Page 16: \"according to Laplace’s law, the pressure in the smaller alveolus must be greater than in the larger alveolus, and the smaller alveolus will empty into the larger alveolus.\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO3: Define surface tension and describe how it applies to lung mechanics, including the effects of [specific factors].",
+                fullLO: "LO3: Define surface tension and describe how it applies to lung mechanics, including the effects of alveolar size and the role of surfactants",
+                question: "A preterm infant is born with insufficient surfactant production. Surfactant is a phospholipid-protein complex that is essential for lung stability. Which of the following best describes the specific action of surfactant on alveolar surface tension?",
+                options: {
+                    A: "It increases surface tension as alveolar radius decreases",
+                    B: "It keeps surface tension constant regardless of alveolar size",
+                    C: "It lowers surface tension more as the alveolar radius decreases",
+                    D: "It prevents the stretching of Type II cells",
+                    E: "It raises surface tension to prevent alveolar over-expansion"
+                },
+                correctAnswer: "C",
+                rationale: "Surfactant reduces surface tension generally, but crucially, it reduces it more as the alveolus gets smaller, which prevents collapse (atelectasis) according to the Law of Laplace.",
+                source: "Respiration_PDF.pdf, Page 21: \"Surfactant lowers the surface tension more as the alveolar radius decreases\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO4: Draw the compliance curves for the lungs, chest wall, and respiratory system... Show and explain the significance of the [resting positions].",
+                fullLO: "LO4: Draw the compliance curves for the lungs, chest wall, and respiratory system on the same set of axes. Show and explain the significance of the resting positions for each of these three structures",
+                question: "The respiratory system consists of the lungs and the chest wall acting in series. Consequently, the compliance of the total respiratory system is related to the compliance of its individual parts. Which of the following statements accurately describes the total compliance of the chest-lung unit?",
+                options: {
+                    A: "It is equal to the compliance of the chest wall alone",
+                    B: "It is equal to the compliance of the lung alone",
+                    C: "It is greater than the individual compliance of either component",
+                    D: "It is lower than the individual compliance of either component",
+                    E: "It is the sum of the lung and chest wall compliances"
+                },
+                correctAnswer: "D",
+                rationale: "Because the components are in series, compliances add as reciprocals (1/C_total=1/C_chest+1/C_lung). This results in a total compliance that is lower than either individual component.",
+                source: "Respiration_PDF.pdf, Page 14: \"The chest-lung unit has lower compliance than the individual components.\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO4: Draw the compliance curves for the lungs, chest wall, and respiratory system... Show and explain the significance of the [resting positions].",
+                fullLO: "LO4: Draw the compliance curves for the lungs, chest wall, and respiratory system on the same set of axes. Show and explain the significance of the resting positions for each of these three structures",
+                question: "A respiratory physiologist analyzes the relaxation pressure-volume curve of the respiratory system. At volumes below the Functional Residual Capacity (FRC), the balance of forces acting on the respiratory system creates a tendency for the system to:",
+                options: {
+                    A: "Collapse further",
+                    B: "Maintain the current volume",
+                    C: "Move toward a higher volume (back to FRC)",
+                    D: "Generate a positive airway pressure",
+                    E: "Decrease chest wall compliance"
+                },
+                correctAnswer: "C",
+                rationale: "FRC is the equilibrium point. Below FRC, the outward recoil of the chest wall dominates, pushing the system back toward the higher equilibrium volume.",
+                source: "Respiration_PDF.pdf, Page 29: \"At volumes below FRC, the balance of forces pushes the system toward a higher volume, that is, back to FRC.\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO5: Draw a normal spirogram... Identify the volumes and capacities that [cannot be measured directly].",
+                fullLO: "LO5: Draw a normal spirogram, label the four lung volumes and four capacities. Identify the volumes that comprise each of the capacities. Identify the volumes and capacities that cannot be measured by spirometry",
+                question: "A patient undergoes standard spirometry to evaluate lung function. While most volumes can be measured directly, certain volumes and capacities require indirect methods such as helium dilution or body plethysmography. Which of the following capacities CANNOT be determined by spirometry alone?",
+                options: {
+                    A: "Forced Vital Capacity (FVC)",
+                    B: "Functional Residual Capacity (FRC)",
+                    C: "Inspiratory Capacity (IC)",
+                    D: "Vital Capacity (VC)",
+                    E: "Tidal Volume (VT)"
+                },
+                correctAnswer: "B",
+                rationale: "FRC includes the Residual Volume (RV). Since RV cannot be exhaled, it cannot be measured by spirometry. Therefore, FRC cannot be measured by spirometry.",
+                source: "Respiration_PDF.pdf, Page 47: \"The RV, the FRC, and the TLC cannot be determined with a spirometer because the subject cannot exhale all the gas in the lungs.\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO5: Draw a normal spirogram... Identify the volumes and capacities that [cannot be measured directly].",
+                fullLO: "LO5: Draw a normal spirogram, label the four lung volumes and four capacities. Identify the volumes that comprise each of the capacities. Identify the volumes and capacities that cannot be measured by spirometry",
+                question: "During a pulmonary function test, a patient breathes normally, then inhales maximally, and then exhales maximally. The volume of air exhaled from the point of maximal inspiration to the point of maximal expiration is recorded. This measurement is the:",
+                options: {
+                    A: "Expiratory Reserve Volume",
+                    B: "Functional Residual Capacity",
+                    C: "Inspiratory Reserve Volume",
+                    D: "Total Lung Capacity",
+                    E: "Vital Capacity"
+                },
+                correctAnswer: "E",
+                rationale: "Vital capacity is the maximum amount of air that can be expired after a maximum inspiration. It is measurable by spirometry.",
+                source: "Respiration_PDF.pdf, Page 47: \"The TV, IRV, ERV, IC, and VC can all be measured with a spirometer\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO6: Calculate alveolar ventilation from measures of tidal volume and dead space. Explain the difference between [types of dead space].",
+                fullLO: "LO6: Calculate alveolar ventilation from measures of tidal volume and dead space. Explain the difference between anatomical and physiological dead space",
+                question: "A physiology student interprets a diagram of respiratory volumes. The diagram indicates a tidal volume (VT) of 500 mL, an anatomic dead space (VD) of 150 mL, and a respiratory frequency of 15 breaths/min. Based on these data, what is the calculated alveolar ventilation?",
+                options: {
+                    A: "2250 mL/min",
+                    B: "5250 mL/min",
+                    C: "6000 mL/min",
+                    D: "7500 mL/min",
+                    E: "9750 mL/min"
+                },
+                correctAnswer: "B",
+                rationale: "Alveolar ventilation = (Tidal Volume - Dead Space) × Frequency. (500-150)×15=350×15=5250 mL/min.",
+                source: "Respiration_PDF.pdf, Page 42: \"Tidal volume 500 ml... Anatomic dead space 150 ml... Frequency 15/min... Alveolar ventilation 5250 ml/min\""
+            },
+            {
+                section: "Mechanics and Ventilation",
+                maskedLO: "LO6: Calculate alveolar ventilation from measures of tidal volume and dead space. Explain the difference between [types of dead space].",
+                fullLO: "LO6: Calculate alveolar ventilation from measures of tidal volume and dead space. Explain the difference between anatomical and physiological dead space",
+                question: "A 65-year-old male with emphysema undergoes testing to evaluate wasted ventilation. His physiological dead space is found to be greater than his anatomical dead space. This discrepancy is best explained by the presence of:",
+                options: {
+                    A: "Air remaining in the conducting airways (trachea and bronchi)",
+                    B: "Alveolar dead space (alveoli that are ventilated but not perfused)",
+                    C: "Decreased residual volume",
+                    D: "Increased chest wall compliance",
+                    E: "Increased tidal volume"
+                },
+                correctAnswer: "B",
+                rationale: "Anatomical dead space is the conducting zone. Physiological dead space includes anatomical dead space plus alveolar dead space (alveoli that are ventilated but not perfused). In healthy lungs, alveolar dead space is negligible; in disease, it increases.",
+                source: "Respiration_PDF.pdf, Page 43: \"Alveolar dead space: alveoli that cannot participate in gas exchange due to insufficient perfusion... Alveolar dead space can be pathologic in disease states (e.g., COPD)\""
+            },
+
+            // --- Section 2: Gas Exchange and Diffusion ---
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO1: Define partial pressure and fractional concentration... Compare the normal fractional concentrations and [sea level partial pressures] for O2, CO2, and N2.",
+                fullLO: "LO1: Define partial pressure and fractional concentration as they apply to gases in air. Compare the normal fractional concentrations and sea level partial pressures for O2, CO2, and N2.",
+                question: "A medical student is studying respiratory physiology at sea level, where the barometric pressure (PB) is 760 mmHg. To understand the partial pressure of oxygen in the conducting airways, the student must account for the effect of water vapor pressure (PH2O), which is 47 mmHg at body temperature. Which of the following values represents the calculated partial pressure of inspired oxygen (PIO2) in the humidified airways?",
+                options: {
+                    A: "100 mmHg",
+                    B: "149 mmHg",
+                    C: "159 mmHg",
+                    D: "713 mmHg",
+                    E: "760 mmHg"
+                },
+                correctAnswer: "B",
+                rationale: "The inspired PO2 is calculated by subtracting water vapor pressure from the barometric pressure and multiplying by the fractional concentration of oxygen (0.21). PIO2=0.21×(760-47)=0.21×713≈150 mmHg (or 149 mmHg more precisely as shown in the diagram).",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 6: \"In this perfect lung, the inspired PO2 is ~ 150 mmHg. This value comes from humidifying room air: PB = 760 mmHg... PH2O = 47 mmHg... PDRY = 713 mmHg... PO2 = 0.21 x 713 mmHg... PO2 = 150 mmHg\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO1: Define partial pressure and fractional concentration... Compare the normal fractional concentrations and [sea level partial pressures] for O2, CO2, and N2.",
+                fullLO: "LO1: Define partial pressure and fractional concentration as they apply to gases in air. Compare the normal fractional concentrations and sea level partial pressures for O2, CO2, and N2.",
+                question: "A respiratory therapist monitors the gas partial pressures of a patient breathing room air. The therapist notes a decrease in the partial pressure of oxygen from the atmospheric air to the conducting airways. This initial drop in PO2 prior to reaching the alveoli is primarily due to which of the following physical processes?",
+                options: {
+                    A: "Diffusion across the alveolar wall",
+                    B: "Dilution by carbon dioxide",
+                    C: "Humidification",
+                    D: "Oxygen uptake by hemoglobin",
+                    E: "Ventilation-perfusion mismatch"
+                },
+                correctAnswer: "C",
+                rationale: "The drop from Atmospheric air PO2 (159 mmHg) to Airway gas PO2 (149 mmHg) is caused by humidification (the addition of water vapor).",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 4: \"Atmospheric air PO2 = 159 mmHg -> Humidification -> Airway gas PO2 = 149 mmHg\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO2: Understand why there are differences in the normal [various compartment] PO2 and PCO2 values.",
+                fullLO: "LO2: Understand why there are differences in the normal airway, alveolar, arterial, and mixed venous PO2 and PCO2 values.",
+                question: "A healthy 25-year-old male participates in a respiratory study. Measurements show his inspired oxygen partial pressure (PIO2) is approximately 150 mmHg, yet his alveolar oxygen partial pressure (PAO2) is consistently maintained around 100 mmHg. Which of the following best explains this difference in partial pressures?",
+                options: {
+                    A: "Continuous removal of O2 by pulmonary blood flow",
+                    B: "Inability of O2 to diffuse across the blood-gas barrier",
+                    C: "Presence of a large physiologic shunt",
+                    D: "Rapid humidification of inspired air",
+                    E: "Turbulent airflow in the trachea"
+                },
+                correctAnswer: "A",
+                rationale: "The alveolar PO2 is lower than inspired PO2 because oxygen is continuously removed from the alveoli by pulmonary blood flow, balanced against the addition of oxygen by ventilation.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 6: \"We 'lose' roughly one-third of the available oxygen between the inspired gas and the alveoli. This occurs because two opposing processes determine alveolar PO2: 1. Ventilation continuously adds O2 to the alveoli. 2. Pulmonary blood flow continuously removes O2 from the alveoli.\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO2: Understand why there are differences in the normal [various compartment] PO2 and PCO2 values.",
+                fullLO: "LO2: Understand why there are differences in the normal airway, alveolar, arterial, and mixed venous PO2 and PCO2 values.",
+                question: "A physiologist analyzes blood samples from a healthy individual. The alveolar PO2 is measured at 100 mmHg. However, the systemic arterial PO2 is measured at 92 mmHg. This observed alveolar-arterial oxygen gradient is primarily attributed to which of the following physiologic mechanisms?",
+                options: {
+                    A: "Diffusion limitation of oxygen",
+                    B: "High affinity of hemoglobin for carbon monoxide",
+                    C: "Hypoventilation",
+                    D: "Increased thickness of the blood-gas barrier",
+                    E: "Normal physiologic shunt"
+                },
+                correctAnswer: "E",
+                rationale: "A small amount of shunt is present in the normal lung (bronchial circulation and Thebesian veins), which explains the slight drop in PO2 between end-capillary blood (equilibrated with alveoli) and systemic arterial blood.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 14: \"Even in the normal lung, a small amount of shunt is present. This explains the slight drop in PO2 between end-capillary blood... and systemic arterial blood.\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO3: Be able to estimate the alveolar oxygen partial pressure (PAO2) using the [specific equation].",
+                fullLO: "LO3: Be able to estimate the alveolar oxygen partial pressure (PAO2) using the alveolar gas equation.",
+                question: "A 30-year-old female presents to the emergency department with a suspected drug overdose causing hypoventilation. Arterial blood gas analysis reveals a PaCO2 of 80 mmHg. The patient is breathing room air at sea level (PIO2 = 150 mmHg). Assuming a respiratory exchange ratio (R) of 0.8, what is the estimated alveolar oxygen partial pressure (PAO2)?",
+                options: {
+                    A: "40 mmHg",
+                    B: "50 mmHg",
+                    C: "60 mmHg",
+                    D: "90 mmHg",
+                    E: "100 mmHg"
+                },
+                correctAnswer: "B",
+                rationale: "Using the alveolar gas equation: PAO2=PIO2-(PACO2/R). PAO2=150-(80/0.8)=150-100=50 mmHg.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 9: \"Let’s calculate the alveolar PO2 in hypoventilation... PIO2 = 150 mmHg... PACO2 = 80 mmHg... R = 0.8... -> PAO2 = 50 mmHg\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO3: Be able to estimate the alveolar oxygen partial pressure (PAO2) using the [specific equation].",
+                fullLO: "LO3: Be able to estimate the alveolar oxygen partial pressure (PAO2) using the alveolar gas equation.",
+                question: "A patient with severe hypoventilation has an alveolar PCO2 of 80 mmHg. The clinical team wishes to raise the patient's alveolar PO2 (PAO2) to a normal value of 100 mmHg without changing the ventilation status. Assuming a respiratory quotient of 0.8, what inspired PO2 (PIO2) is required to achieve this goal?",
+                options: {
+                    A: "150 mmHg",
+                    B: "160 mmHg",
+                    C: "180 mmHg",
+                    D: "200 mmHg",
+                    E: "250 mmHg"
+                },
+                correctAnswer: "D",
+                rationale: "Rearranging the alveolar gas equation for the desired PAO2 of 100 mmHg: 100=PIO2-(80/0.8). 100=PIO2-100. PIO2=200 mmHg.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 10: \"100 mmHg for PAO2... we know the PACO2 is 80 mmHg... We can solve the equation for PIO2 -> 200 mmHg\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO4: Describe in quantitative terms the effect of ventilation on PCO2 according to the [specific equation].",
+                fullLO: "LO4: Describe in quantitative terms the effect of ventilation on PCO2 according to the alveolar ventilation equation.",
+                question: "A 22-year-old male is brought to the hospital after a heroin overdose. His respiratory rate is significantly depressed. If his alveolar ventilation is reduced by half compared to his baseline, what is the expected change in his alveolar PCO2?",
+                options: {
+                    A: "It will decrease by half.",
+                    B: "It will decrease by one-fourth.",
+                    C: "It will double.",
+                    D: "It will quadruple.",
+                    E: "It will remain unchanged."
+                },
+                correctAnswer: "C",
+                rationale: "According to the alveolar ventilation equation, there is an inverse relationship between alveolar ventilation and alveolar PCO2. If ventilation is halved, PCO2 doubles.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 8: \"The alveolar ventilation equation shows the inverse relationship... If alveolar ventilation is reduced by half (hypoventilation), alveolar PCO2 doubles.\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO4: Describe in quantitative terms the effect of ventilation on PCO2 according to the [specific equation].",
+                fullLO: "LO4: Describe in quantitative terms the effect of ventilation on PCO2 according to the alveolar ventilation equation.",
+                question: "A 19-year-old female presents with an anxiety attack and is hyperventilating. Assuming her CO2 production remains constant, if she doubles her alveolar ventilation, her alveolar PCO2 will:",
+                options: {
+                    A: "Decrease by 25%",
+                    B: "Double",
+                    C: "Halve",
+                    D: "Increase by 50%",
+                    E: "Remain constant"
+                },
+                correctAnswer: "C",
+                rationale: "There is an inverse relationship between ventilation and PCO2. If alveolar ventilation doubles, alveolar PCO2 is halved.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 8: \"If alveolar ventilation doubles, alveolar PCO2 is halved.\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO5: Understand the different factors that contribute to [perfusion-limited vs diffusion-limited conditions].",
+                fullLO: "LO5: Understand the different factors that contribute to perfusion-limited vs diffusion-limited conditions.",
+                question: "A researcher is studying gas exchange properties using Carbon Monoxide (CO). Upon inhalation, CO binds avidly to hemoglobin, preventing the partial pressure of CO in the blood from rising significantly. A large partial pressure gradient is maintained across the blood-gas barrier throughout the capillary length. This gas is classified as:",
+                options: {
+                    A: "Diffusion-limited",
+                    B: "Perfusion-limited",
+                    C: "Solubility-limited",
+                    D: "Transport-limited",
+                    E: "Ventilation-limited"
+                },
+                correctAnswer: "A",
+                rationale: "Because the back pressure of CO in the blood does not rise appreciably (due to Hb binding), the limiting factor for transfer is the diffusion properties of the barrier, not the amount of blood flow.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 26: \"The limiting factor is the barrier’s diffusion properties. CO is the classic example of a diffusion-limited gas.\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO5: Understand the different factors that contribute to [perfusion-limited vs diffusion-limited conditions].",
+                fullLO: "LO5: Understand the different factors that contribute to perfusion-limited vs diffusion-limited conditions.",
+                question: "A patient undergoes anesthesia induction with Nitrous Oxide (N2O). This gas equilibrates with alveolar partial pressures very rapidly (within 1/10th of the capillary transit time) because it does not bind to hemoglobin. The transfer of this gas into the blood is limited by:",
+                options: {
+                    A: "The diffusion capacity of the membrane",
+                    B: "The partial pressure gradient",
+                    C: "The rate of blood flow",
+                    D: "The solubility coefficient",
+                    E: "The thickness of the blood-gas barrier"
+                },
+                correctAnswer: "C",
+                rationale: "Since N2O equilibrates almost immediately, the only way to increase transfer is to bring in fresh blood. Thus, it is perfusion-limited.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 28: \"Instead, the limiting factor is blood flow, how quickly fresh, N2O-free blood is delivered to the alveolus. For this reason, N2O is the classic example of a perfusion-limited gas.\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO6: Be able to understand the relevance of [shunts and arterial PO2].",
+                fullLO: "LO6: Be able to understand the relevance of shunts and arterial PO2.",
+                question: "A newborn is diagnosed with a right-to-left cardiac shunt. The infant is hypoxemic. The physician administers 100% oxygen, but the arterial PO2 does not rise to the expected high level (>600 mmHg). This failure to correct with 100% oxygen is a diagnostic feature of:",
+                options: {
+                    A: "Diffusion limitation",
+                    B: "Hypoventilation",
+                    C: "Perfusion limitation",
+                    D: "True shunt",
+                    E: "Ventilation-perfusion inequality"
+                },
+                correctAnswer: "D",
+                rationale: "Shunt is the only cause of hypoxemia where arterial PO2 does not correct with 100% O2 because the shunted blood bypasses the ventilated alveoli entirely.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 18: \"Shunt is the only cause of hypoxemia in which arterial PO2 does not correct with 100% O2.\""
+            },
+            {
+                section: "Gas Exchange and Diffusion",
+                maskedLO: "LO6: Be able to understand the relevance of [shunts and arterial PO2].",
+                fullLO: "LO6: Be able to understand the relevance of shunts and arterial PO2.",
+                question: "In a healthy individual, a small fraction of venous blood enters the left side of the heart without passing through ventilated regions of the lung, creating a normal physiologic shunt. Which of the following vascular structures contributes to this physiologic shunt?",
+                options: {
+                    A: "Bronchial circulation",
+                    B: "Inferior Vena Cava",
+                    C: "Pulmonary arterioles",
+                    D: "Pulmonary capillaries",
+                    E: "Superior Vena Cava"
+                },
+                correctAnswer: "A",
+                rationale: "The normal physiologic shunt arises from the bronchial circulation (which drains partially into pulmonary veins) and Thebesian veins.",
+                source: "Gas_Exchange_and_Diffusion_PDF.pdf, Page 14: \"Normal physiologic shunt arises from: Bronchial circulation, which drains partially into the pulmonary veins.\""
+            },
+
+            // --- Section 3: Gas Transport ---
+            {
+                section: "Gas Transport",
+                maskedLO: "LO1: Define oxygen partial pressure (tension), oxygen content, and percent hemoglobin saturation as they pertain to [blood].",
+                fullLO: "LO1: Define oxygen partial pressure (tension), oxygen content, and percent hemoglobin saturation as they pertain to blood.",
+                question: "A 45-year-old male with a history of chronic kidney disease presents with fatigue. Laboratory evaluation reveals a hemoglobin concentration of 10 g/dL (normal ~15 g/dL). Arterial blood gas analysis shows a normal PaO2 of 100 mmHg. Based on these findings, which of the following best describes the oxygen status of this patient's arterial blood compared to a healthy individual with normal hemoglobin?",
+                options: {
+                    A: "Decreased oxygen content",
+                    B: "Decreased oxygen partial pressure",
+                    C: "Decreased percent hemoglobin saturation",
+                    D: "Increased dissolved oxygen",
+                    E: "Increased oxygen binding capacity"
+                },
+                correctAnswer: "A",
+                rationale: "Oxygen content is determined by the amount of hemoglobin available to bind oxygen and the partial pressure of oxygen. In anemia (low Hb), the partial pressure (PO2) and saturation (HbO2) can be normal, but the total oxygen content is reduced because there is less hemoglobin to carry the oxygen.",
+                source: "Gas_Transport_2026.pdf, Page 20: \"If decrease concentration of Hb (anemia) ~10 g/dl, at a PO2 of 100 mmHg has a HbO2 saturation ~100% and an O2 concentration of ~12 ml/dl [compared to ~20 ml/dl in normal blood]\""
+            },
+            {
+                section: "Gas Transport",
+                maskedLO: "LO1: Define oxygen partial pressure (tension), oxygen content, and percent hemoglobin saturation as they pertain to [blood].",
+                fullLO: "LO1: Define oxygen partial pressure (tension), oxygen content, and percent hemoglobin saturation as they pertain to blood.",
+                question: "A medical student is studying the physics of gas transport in liquids. They observe a beaker of plasma equilibrated with a gas mixture containing oxygen. Which of the following forms of oxygen is the sole determinant of the partial pressure of oxygen (PO2) measured in this liquid?",
+                options: {
+                    A: "Oxygen bound to albumin",
+                    B: "Oxygen bound to hemoglobin",
+                    C: "Oxygen bound to plasma proteins",
+                    D: "Oxygen chemically modified by enzymes",
+                    E: "Oxygen dissolved in solution"
+                },
+                correctAnswer: "E",
+                rationale: "The partial pressure of a gas in a liquid is determined only by the gas that is physically dissolved in the solution. Gas bound to other substances (like hemoglobin) does not contribute to the partial pressure.",
+                source: "Gas_Transport_2026.pdf, Page 4: \"The partial pressure of a gas in a liquid is determined by the gas that is in solution. Gas that is in the liquid but is bound to another substance does not contribute to the partial pressure\""
+            },
+            {
+                section: "Gas Transport",
+                maskedLO: "LO2: Draw an oxyhemoglobin dissociation curve... showing the relationships between [key oxygen parameters].",
+                fullLO: "LO2: Draw an oxyhemoglobin dissociation curve (hemoglobin oxygen equilibrium curve) showing the relationships between oxygen partial pressure, hemoglobin saturation, and blood oxygen content.",
+                question: "A 30-year-old mountaineer ascends to a high altitude where the alveolar PO2 drops to approximately 60 mmHg. Despite this significant drop in partial pressure, the climber remains conscious and functional. Which feature of the oxyhemoglobin dissociation curve best explains the maintenance of oxygen saturation under these conditions?",
+                options: {
+                    A: "The linear relationship between PO2 and saturation in the steep portion",
+                    B: "The plateau (flat) portion of the curve at high partial pressures",
+                    C: "The rightward shift of the curve caused by 2,3-DPG",
+                    D: "The steep slope of the curve at low partial pressures",
+                    E: "The vertical orientation of the curve at P50"
+                },
+                correctAnswer: "B",
+                rationale: "The flat part of the dissociation curve (Association phase) allows hemoglobin to remain almost fully saturated even when alveolar PO2 drops significantly (e.g., to ~60 mmHg), acting as a safety factor at high altitudes.",
+                source: "Gas_Transport_2026.pdf, Page 16: \"The flat part of the curve allows saturation of Hb when alveolar PO2 is lower than 104 mm Hg... Even at ~60 mmHg the Hb is still almost fully saturated with O2.\""
+            },
+            {
+                section: "Gas Transport",
+                maskedLO: "LO2: Draw an oxyhemoglobin dissociation curve... showing the relationships between [key oxygen parameters].",
+                fullLO: "LO2: Draw an oxyhemoglobin dissociation curve (hemoglobin oxygen equilibrium curve) showing the relationships between oxygen partial pressure, hemoglobin saturation, and blood oxygen content.",
+                question: "A 65-year-old patient with chronic obstructive pulmonary disease (COPD) has a chronic elevation of arterial PCO2 and hydrogen ion concentration (H+). This physiological state alters the affinity of hemoglobin for oxygen. How does this change affect the oxyhemoglobin dissociation curve and oxygen delivery to the tissues?",
+                options: {
+                    A: "Shifts the curve to the left, decreasing oxygen release at the tissues",
+                    B: "Shifts the curve to the left, increasing oxygen release at the tissues",
+                    C: "Shifts the curve to the right, decreasing oxygen release at the tissues",
+                    D: "Shifts the curve to the right, increasing oxygen release at the tissues",
+                    E: "Shifts the curve upward, increasing total oxygen capacity"
+                },
+                correctAnswer: "D",
+                rationale: "Increased PCO2, increased temperature, increased H+ (acidity), and increased 2,3-DPG cause a \"shift to the right\" (Bohr Effect). This decreases hemoglobin's affinity for oxygen, thereby increasing the efficiency of oxygen unloading/release at the tissues.",
+                source: "Gas_Transport_2026.pdf, Page 23: \"Shift to Right = Less O2 attached to Hb for any given PO2... These factors increase efficiency of oxygen release at tissue\""
+            },
+            {
+                section: "Gas Transport",
+                maskedLO: "LO3: Describe the percentage of total CO2 transported in each different form... and identify the [key enzyme].",
+                fullLO: "LO3: Describe the percentage of total CO2 transported in each different form in whole blood and identify the enzyme that is essential to normal carbon dioxide transport by the blood and its location.",
+                question: "A physiology researcher is analyzing the transport forms of carbon dioxide in venous blood. The majority (approximately 70%) of carbon dioxide released from the tissues is transported to the lungs in which of the following forms?",
+                options: {
+                    A: "Bound to albumin",
+                    B: "Carbaminohemoglobin",
+                    C: "Dissolved CO2 gas",
+                    D: "Bicarbonate ion (HCO3-)",
+                    E: "Carbonic acid (H2CO3)"
+                },
+                correctAnswer: "D",
+                rationale: "70% of CO2 is transported as bicarbonate (HCO3-), which is in chemical equilibrium with CO2.",
+                source: "Gas_Transport_2026.pdf, Page 26: \"As Bicarbonate (70%)... Major contributor to blood CO2 content... accounts for 70% of CO2 release at the lung\""
+            },
+            {
+                section: "Gas Transport",
+                maskedLO: "LO3: Describe the percentage of total CO2 transported in each different form... and identify the [key enzyme].",
+                fullLO: "LO3: Describe the percentage of total CO2 transported in each different form in whole blood and identify the enzyme that is essential to normal carbon dioxide transport by the blood and its location.",
+                question: "In the systemic capillaries, carbon dioxide combines with water to form carbonic acid, a reaction that proceeds rapidly due to the presence of a specific enzyme. In which anatomical location is this enzyme primarily found to facilitate this rapid transport mechanism?",
+                options: {
+                    A: "Capillary endothelial cell cytoplasm",
+                    B: "Plasma",
+                    C: "Platelet cytoplasm",
+                    D: "Red blood cell cytoplasm",
+                    E: "White blood cell cytoplasm"
+                },
+                correctAnswer: "D",
+                rationale: "Carbonic anhydrase is the enzyme that catalyzes the reaction of CO2 and H2O. It is found in red blood cells (and gastric/renal endothelia), allowing the reaction to go 5,000-fold faster.",
+                source: "Gas_Transport_2026.pdf, Page 29: \"Carbonic anhydrase is an enzyme in red blood cells... that allows the reaction to go 5000-fold faster than normal\""
+            },
+            {
+                section: "Gas Transport",
+                maskedLO: "LO4: Draw the carbon dioxide dissociation curves... Describe the interplay between CO2 and O2 binding on hemoglobin that causes the [Haldane effect].",
+                fullLO: "LO4: Draw the carbon dioxide dissociation curves for oxy- and deoxyhemoglobin. Describe the interplay between CO2 and O2 binding on hemoglobin that causes the Haldane effect.",
+                question: "Blood passing through the systemic capillaries releases oxygen to the tissues, resulting in an increase in the concentration of deoxygenated hemoglobin. This physiological change enhances the blood's capacity to carry carbon dioxide. This phenomenon is known as:",
+                options: {
+                    A: "The Bohr Effect",
+                    B: "The Chloride Shift",
+                    C: "The Haldane Effect",
+                    D: "The Hamburger Phenomenon",
+                    E: "The Oxygen-Hemoglobin Dissociation"
+                },
+                correctAnswer: "C",
+                rationale: "The Haldane effect describes the phenomenon where deoxygenated hemoglobin binds more CO2 (and H+) than oxygenated hemoglobin. This facilitates CO2 transport from tissues.",
+                source: "Gas_Transport_2026.pdf, Page 35: \"When hemoglobin becomes deoxygenated, it can bind substantially more CO2, a direct consequence of the Haldane effect.\""
+            },
+            {
+                section: "Gas Transport",
+                maskedLO: "LO4: Draw the carbon dioxide dissociation curves... Describe the interplay between CO2 and O2 binding on hemoglobin that causes the [Haldane effect].",
+                fullLO: "LO4: Draw the carbon dioxide dissociation curves for oxy- and deoxyhemoglobin. Describe the interplay between CO2 and O2 binding on hemoglobin that causes the Haldane effect.",
+                question: "A student compares the dissociation curves for oxygen and carbon dioxide. In contrast to the sigmoid shape of the oxyhemoglobin dissociation curve, the carbon dioxide dissociation curve within the physiological range is best described as:",
+                options: {
+                    A: "Exponential",
+                    B: "Hyperbolic",
+                    C: "Linear and steeper",
+                    D: "Parabolic",
+                    E: "Sigmoid and flatter"
+                },
+                correctAnswer: "C",
+                rationale: "The CO2 dissociation curve is described as steeper and more linear than the O2 curve.",
+                source: "Gas_Transport_2026.pdf, Page 36: \"CO2 is more linear and steeper than O2\""
+            },
+
+            // --- Section 4: Pediatric Viral Infections ---
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO1: List the clinical features of [epidemic keratoconjunctivitis].",
+                fullLO: "LO1: List the clinical features of epidemic keratoconjunctivitis.",
+                question: "A 7-year-old child presents with redness, tearing, and purulent discharge from both eyes. The mother reports the child went to a public swimming pool recently. The condition is highly contagious. The most likely etiology is:",
+                options: {
+                    A: "Adenovirus serotype 3",
+                    B: "Adenovirus serotype 8",
+                    C: "Coxsackievirus A16",
+                    D: "Parainfluenza virus",
+                    E: "Respiratory Syncytial Virus"
+                },
+                correctAnswer: "B",
+                rationale: "Epidemic keratoconjunctivitis is most commonly caused by Adenovirus serotype 8 and is highly contagious (swimming pools are a common source).",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 1: \"Epidemic Keratoconjunctivitis... Adenovirus serotype 8 most common cause; highly contagious... public swimming pools\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO1: List the clinical features of [epidemic keratoconjunctivitis].",
+                fullLO: "LO1: List the clinical features of epidemic keratoconjunctivitis.",
+                question: "A patient presents with symptoms of epidemic keratoconjunctivitis (pink eye), including redness, tearing, and purulent discharge. The physician notes that while these symptoms are typical, the presence of photophobia would suggest:",
+                options: {
+                    A: "A bacterial superinfection",
+                    B: "A more serious diagnosis requiring an ophthalmologist",
+                    C: "Allergy-associated conjunctivitis",
+                    D: "Involvement of the retina",
+                    E: "Normal progression of the viral infection"
+                },
+                correctAnswer: "B",
+                rationale: "Photophobia is rare in uncomplicated epidemic keratoconjunctivitis and suggests a more serious diagnosis warranting referral.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 1: \"Symptoms: redness, tearing, itchiness, purulent discharge; photophobia rare (suggest more serious diagnosis → ophthalmologist\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO2: Distinguish the clinical manifestations of pharyngitis caused by [virus A] with those caused by [virus B].",
+                fullLO: "LO2: Distinguish the clinical manifestations of pharyngitis caused by Adenovirus with those caused by Coxsackie viruses",
+                question: "A 5-year-old boy presents with high fever, malaise, and a severe sore throat. Examination of the oral cavity reveals vesicular ulcers on the posterior pharynx. This clinical presentation, known as Herpangina, is most characteristic of infection with:",
+                options: {
+                    A: "Adenovirus",
+                    B: "Coxsackie A virus",
+                    C: "Epstein-Barr Virus",
+                    D: "Parainfluenza virus",
+                    E: "Rhinovirus"
+                },
+                correctAnswer: "B",
+                rationale: "Herpangina is caused by Coxsackie A virus and presents with vesicles/ulcers on the posterior pharynx.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 2: \"Herpangina... Microbiology... Coxsackie A*... Exam: vesicular/ulcers on posterior pharynx\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO2: Distinguish the clinical manifestations of pharyngitis caused by [virus A] with those caused by [virus B].",
+                fullLO: "LO2: Distinguish the clinical manifestations of pharyngitis caused by Adenovirus with those caused by Coxsackie viruses",
+                question: "A child presents with sore throat, red eyes, and fever. Physical exam reveals red conjunctivae, a red throat, and lymphadenopathy. This syndrome, known as Pharyngoconjunctival Fever, is most commonly caused by:",
+                options: {
+                    A: "Adenovirus (serotype 3)",
+                    B: "Coxsackie A16",
+                    C: "Herpes Simplex Virus",
+                    D: "Influenza A",
+                    E: "Respiratory Syncytial Virus"
+                },
+                correctAnswer: "A",
+                rationale: "Pharyngoconjunctival Fever presents with sore throat, red eyes, and lymphadenopathy, and is most commonly caused by Adenovirus serotype 3.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 1: \"Pharyngoconjunctival Fever... Adenovirus (serotype 3) most common... Symptoms: sore throat, red eyes... Exam: fever, red conjunctivae & throat; lymphadenopathy\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO3: List the most common causes of [croup].",
+                fullLO: "LO3: List the most common causes of croup",
+                question: "A 2-year-old child is brought to the emergency department with a barking cough and stridor. The physician diagnoses Laryngotracheobronchitis (Croup). Which of the following viruses is the most common cause of this condition?",
+                options: {
+                    A: "Adenovirus",
+                    B: "Influenza virus",
+                    C: "Parainfluenza virus types 1 & 3",
+                    D: "Respiratory Syncytial Virus (RSV)",
+                    E: "Rhinovirus"
+                },
+                correctAnswer: "C",
+                rationale: "Parainfluenza virus types 1 & 3 are the most common causes of Croup.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 2: \"Laryngotracheobronchitis (Croup)... Microbiology: Parainfluenza virus types 1 & 3 (most common)\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO3: List the most common causes of [croup].",
+                fullLO: "LO3: List the most common causes of croup",
+                question: "The characteristic \"barking\" cough and stridor seen in Croup are caused by inflammation and edema in which anatomical location?",
+                options: {
+                    A: "Alveoli",
+                    B: "Bronchioles",
+                    C: "Epiglottis",
+                    D: "Subglottic airway (larynx/trachea)",
+                    E: "Supraglottic airway"
+                },
+                correctAnswer: "D",
+                rationale: "Croup pathophysiology involves inflammation and edema of the larynx and trachea, specifically narrowing the subglottic airway.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 2: \"Inflammation edema of the larynx, trachea... → narrowed, subglottic airway.\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO4: List the clinical features of [severe croup].",
+                fullLO: "LO4: List the clinical features of severe croup",
+                question: "A child with Croup is being evaluated using the Westley scoring system. Which of the following physical exam findings would result in the highest points (indicating severe obstruction) for the \"stridor\" category?",
+                options: {
+                    A: "No stridor",
+                    B: "Stridor only when agitated",
+                    C: "Stridor at rest",
+                    D: "Stridor only during sleep",
+                    E: "Expiratory wheezing"
+                },
+                correctAnswer: "C",
+                rationale: "In the Westley scoring system, stridor at rest is assigned 2 points, whereas stridor only when agitated is 1 point.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 3: \"Stridor: none: 0; when agitated: 1; at rest: 2\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO4: List the clinical features of [severe croup].",
+                fullLO: "LO4: List the clinical features of severe croup",
+                question: "A lateral neck X-ray is obtained in a child with suspected Croup. Which radiographic sign is characteristic of the subglottic narrowing associated with this condition?",
+                options: {
+                    A: "Deep sulcus sign",
+                    B: "Hilar lymphadenopathy",
+                    C: "Steeple sign",
+                    D: "Thumb sign",
+                    E: "Tram-tracking"
+                },
+                correctAnswer: "C",
+                rationale: "The \"steeple sign\" on neck x-ray is characteristic of the subglottic narrowing in croup.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 3: \"Neck x-ray: 'steeple sign'\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO5: List the most common causes of [bronchiolitis].",
+                fullLO: "LO5: List the most common causes of bronchiolitis",
+                question: "An infant presents in January with wheezing and respiratory distress. The clinical diagnosis is bronchiolitis. Which virus is the most common cause of this condition?",
+                options: {
+                    A: "Adenovirus",
+                    B: "Influenza B",
+                    C: "Parainfluenza type 1",
+                    D: "Respiratory Syncytial Virus (RSV)",
+                    E: "Rhinovirus"
+                },
+                correctAnswer: "D",
+                rationale: "RSV is the most common viral cause of bronchiolitis.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 4: \"RSV (most common) viral cause\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO5: List the most common causes of [bronchiolitis].",
+                fullLO: "LO5: List the most common causes of bronchiolitis",
+                question: "Epidemics of bronchiolitis in the United States typically occur during which time of year?",
+                options: {
+                    A: "Early Autumn (September - October)",
+                    B: "Late Spring to Summer (May - August)",
+                    C: "Winter to Early Spring (December - May)",
+                    D: "Year-round with no seasonality",
+                    E: "Summer only"
+                },
+                correctAnswer: "C",
+                rationale: "Bronchiolitis epidemics are common from December to May.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 4: \"Epidemiology: Epidemics common (December to May)\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO6: Distinguish the clinical features of [bronchiolitis from croup].",
+                fullLO: "LO6: Distinguish the clinical features of bronchiolitis from croup",
+                question: "A 6-month-old infant presents with a persistent cough and rapid breathing. Physical exam reveals nasal flaring, intercostal retractions, and diffuse bilateral inspiratory crackles with expiratory wheezes. The lungs appear hyperinflated on exam. This presentation is most consistent with:",
+                options: {
+                    A: "Bacterial pneumonia",
+                    B: "Bronchiolitis",
+                    C: "Croup",
+                    D: "Epiglottitis",
+                    E: "Foreign body aspiration"
+                },
+                correctAnswer: "B",
+                rationale: "Bronchiolitis presents with crackles, wheezes, and signs of air trapping (hyperinflation), distinguishing it from the stridor and barking cough of croup.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 4: \"Exam: nasal flaring... diffuse, bilateral inspiratory crackles and expiratory wheezes; apparent hepatosplenomegaly (air trapping)\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO6: Distinguish the clinical features of [bronchiolitis from croup].",
+                fullLO: "LO6: Distinguish the clinical features of bronchiolitis from croup",
+                question: "The pathophysiology of bronchiolitis differs from croup. While croup involves the subglottic upper airway, bronchiolitis is characterized by inflammation and mucus plugging in the:",
+                options: {
+                    A: "Alveolar sacs",
+                    B: "Mainstem bronchi",
+                    C: "Pharynx",
+                    D: "Terminal bronchioles",
+                    E: "Trachea"
+                },
+                correctAnswer: "D",
+                rationale: "Bronchiolitis affects the terminal bronchioles, causing air trapping and wheezing.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 4: \"Pathogenesis: Terminal bronchiole inflammation, mucus plugging, narrowing, wheezing\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO7: Distinguish the clinical features of [influenza] from other viral upper respiratory infections.",
+                fullLO: "LO7: Distinguish the clinical features of influenza from other viral upper respiratory infections",
+                question: "A 7-year-old child presents with the abrupt onset of high fever, severe malaise, headache, and a non-productive cough. The severity of the constitutional symptoms (prostration) is most characteristic of:",
+                options: {
+                    A: "Common cold (Rhinovirus)",
+                    B: "Croup",
+                    C: "Influenza",
+                    D: "Pharyngoconjunctival fever",
+                    E: "Streptococcal pharyngitis"
+                },
+                correctAnswer: "C",
+                rationale: "Influenza is characterized by abrupt onset of fever, headache, severe malaise, and prostration, which distinguishes it from the more gradual or less systemic symptoms of other URIs.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 5: \"abrupt onset of fever, headache, sore throat, rhinitis, severe malaise, prostration (frequent)\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO7: Distinguish the clinical features of [influenza] from other viral upper respiratory infections.",
+                fullLO: "LO7: Distinguish the clinical features of influenza from other viral upper respiratory infections",
+                question: "In a patient with pneumonia, distinguishing viral from bacterial etiology can be challenging. However, according to the lecture material, which of the following laboratory findings is more often associated with viral pneumonia compared to bacterial pneumonia?",
+                options: {
+                    A: "Elevated Procalcitonin",
+                    B: "Lobar consolidation on X-ray",
+                    C: "Normal to low WBC count",
+                    D: "Positive blood cultures",
+                    E: "Very high fever (>40°C)"
+                },
+                correctAnswer: "C",
+                rationale: "WBC count in viral pneumonia is often normal-low, whereas bacterial pneumonia typically presents with an elevated WBC.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 6: \"WBC count in viral pneumonia often normal-low; ↓ bacterial pneumonia\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO8: List the antiviral medications for the treatment of [influenza] and outline mechanisms of action.",
+                fullLO: "LO8: List the antiviral medications for the treatment of influenza and outline mechanisms of action",
+                question: "Zanamivir and Oseltamivir are antiviral medications used to treat influenza. They function by blocking the exit of the virus from infected cells. These drugs target which viral enzyme?",
+                options: {
+                    A: "DNA polymerase",
+                    B: "Hemagglutinin",
+                    C: "M2 ion channel",
+                    D: "Neuraminidase",
+                    E: "RNA polymerase"
+                },
+                correctAnswer: "D",
+                rationale: "Zanamivir, Oseltamivir, and Peramivir are Neuraminidase inhibitors that block viral exit from infected cells.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 5: \"Neuraminidase inhibitors (block viral exit from infected cells)... Zanamivir... Oseltamivir... Peramivir\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO8: List the antiviral medications for the treatment of [influenza] and outline mechanisms of action.",
+                fullLO: "LO8: List the antiviral medications for the treatment of influenza and outline mechanisms of action",
+                question: "Baloxavir is an oral antiviral medication used for influenza. Its mechanism of action differs from oseltamivir in that it acts as a:",
+                options: {
+                    A: "Hemagglutinin inhibitor",
+                    B: "M2 ion channel blocker",
+                    C: "mRNA synthesis inhibitor",
+                    D: "Neuraminidase inhibitor",
+                    E: "Protease inhibitor"
+                },
+                correctAnswer: "C",
+                rationale: "Baloxavir is listed as an mRNA inhibitor.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 6: \"mRNA inhibitor: baloxavir (oral)\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO9: Summarize the prevention strategies for [influenza].",
+                fullLO: "LO9: Summarize the prevention strategies for influenza",
+                question: "Two main types of influenza vaccines are available. One is the inactivated vaccine, and the other is the live attenuated vaccine. The live attenuated vaccine is administered via which route?",
+                options: {
+                    A: "Intradermal injection",
+                    B: "Intramuscular injection",
+                    C: "Intravenous injection",
+                    D: "Nasal spray",
+                    E: "Oral drops"
+                },
+                correctAnswer: "D",
+                rationale: "The live attenuated vaccine is a nasal spray.",
+                source: "Viral_Respiratory_Infections_Handout.pdf, Page 6: \"Live attenuated vaccine (nasal spray)\""
+            },
+            {
+                section: "Pediatric Viral Infections",
+                maskedLO: "LO9: Summarize the prevention strategies for [influenza].",
+                fullLO: "LO9: Summarize the prevention strategies for influenza",
+                question: "The live attenuated influenza vaccine (LAIV) is an option for some patients, but it has specific contraindications. According to the lecture slides, which of the following groups should NOT receive the live attenuated vaccine?",
+                options: {
+                    A: "Adults over 50",
+                    B: "Children < 2 years old",
+                    C: "Children with otitis media",
+                    D: "Healthy adolescents",
+                    E: "Patients with a minor egg allergy"
+                },
+                correctAnswer: "B",
+                rationale: "Contraindications for the live attenuated vaccine include children < 2 years old, aspirin therapy (ASA), asthma, and immunocompromised status.",
+                source: "Viral_Respiratory_Infections_Slides.pdf, Page 26: \"contraindications: children < 2, ASA, asthma, immunocompromised\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            let questionCount = 0;
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                questionCount++;
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${questionCount}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    span.textContent = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
